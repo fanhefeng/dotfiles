@@ -7,10 +7,6 @@
 
 # ===== 字体配置 =====
 
-# 字体族名称，指定终端使用的等宽字体
-# Fira Code 是 Mozilla 出品的编程字体，支持连字符（如 => != >=）
-font-family = Menlo
-
 # 字体大小，单位为 pt（磅）
 font-size = 18
 

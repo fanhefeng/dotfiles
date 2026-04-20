@@ -3,5 +3,8 @@
 [character]
 success_symbol = "[->](bold green)"
 
+[directory]
+truncate_to_repo = false
+
 [os]
 disabled = false
