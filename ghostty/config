@@ -7,6 +7,9 @@
 
 # ===== 字体配置 =====
 
+# 字体名称，使用 Nerd Font 以支持 Powerline 圆角和图标字符
+font-family = JetBrainsMono Nerd Font
+
 # 字体大小，单位为 pt（磅）
 font-size = 18
 
