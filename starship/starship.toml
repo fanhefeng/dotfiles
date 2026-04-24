@@ -1,6 +1,13 @@
+# 注意：本配置使用 Nerd Font 图标，需先安装 Nerd Font 字体
+# 下载地址：https://www.nerdfonts.com/
 "$schema" = 'https://starship.rs/config-schema.json'
+
+# 引用调色板，使颜色名（如 red, peach）映射到下方调色板定义的十六进制色值
+# default: 无（使用终端 ANSI 颜色）
 palette = "catppuccin_mocha"
 
+# 主提示符格式，定义左侧 prompt 各模块排列和 Powerline 箭头段落衔接
+# default: "$all"（按内置顺序排列所有启用的模块）
 format = """
 [](red)\
 $os\
@@ -16,6 +23,8 @@ $cmd_duration)\
 $line_break\
 $character"""
 
+# 右侧提示符格式，显示当前项目的语言运行时和虚拟环境
+# default: ""（不显示右侧 prompt）
 right_format = """
 $conda\
 $nodejs\
@@ -25,9 +34,15 @@ $rust\
 $golang"""
 
 [os]
+# 是否禁用该模块，false 表示启用，显示当前 OS 图标
+# default: true（默认不显示）
 disabled = false
+# 模块样式
+# default: "bold white"
 style = "bg:red fg:crust"
 
+# 各操作系统的显示符号，使用 Nerd Font 图标替换默认 emoji
+# default: 各 OS 使用 emoji（如 Macos="🍎 ", Linux="🐧 ", Windows="🪟 "）
 [os.symbols]
 Windows = ""
 Ubuntu = "󰕈"
@@ -51,96 +66,155 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
 [username]
+# 是否始终显示用户名（默认仅在 root 或 SSH 会话中才显示）
+# default: false
 show_always = true
+# 普通用户样式 | default: "yellow bold"
 style_user = "bg:red fg:crust"
+# root 用户样式 | default: "red bold"
 style_root = "bg:red fg:crust"
+# 显示格式 | default: "[$user]($style) in "
 format = '[ $user]($style)'
 
 [directory]
+# 路径截断层级数，0 表示显示完整路径不截断 | default: 3
 truncation_length = 0
+# 进入 git 仓库时是否将路径截断到仓库根目录 | default: true
 truncate_to_repo = false
+# 目录样式 | default: "cyan bold"
 style = "bg:peach fg:crust"
+# 显示格式 | default: "[$path]($style)[$read_only]($read_only_style) "
 format = "[ $path ]($style)"
 
+# 自定义模块：非 git 仓库目录时渲染 Powerline 右三角结尾符关闭 peach 色段
+# 在 git 仓库内时由 git_branch 的 Powerline 衔接符代替
 [custom.dir_tail]
 when = ''' ! git rev-parse --is-inside-work-tree >/dev/null 2>&1 '''
 command = "true"
 format = "[](fg:peach)"
 
+# symbol: 分支图标 | default: " "
+# style: 模块样式 | default: "bold purple"
+# format: 显示格式 | default: "on [$symbol$branch(:$remote_branch)]($style) "
 [git_branch]
 symbol = ""
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
 
+# style: 模块样式 | default: "red bold"
+# format: 显示格式 | default: "([\[$all_status$ahead_behind\]]($style) )"
 [git_status]
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
 
 [character]
+# 是否禁用该模块 | default: false
 disabled = false
+# 上一条命令成功时的提示符号 | default: "[❯](bold green)"
 success_symbol = '[❯](bold fg:green)'
+# 上一条命令失败时的提示符号 | default: "[❯](bold red)"
 error_symbol = '[❯](bold fg:red)'
+# Vim 普通模式提示符号 | default: "[❮](bold green)"
 vimcmd_symbol = '[❮](bold fg:green)'
+# Vim 单字符替换模式提示符号 | default: "[❮](bold purple)"
 vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+# Vim 替换模式提示符号 | default: "[❮](bold purple)"
 vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+# Vim 可视模式提示符号 | default: "[❮](bold yellow)"
 vimcmd_visual_symbol = '[❮](bold fg:yellow)'
 
+# symbol: Node.js 图标 | default: " "
+# style | default: "bold green"
+# format | default: "via [$symbol($version )]($style)"
 [nodejs]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol $version ](fg:crust bg:green)]($style)'
 
+# symbol: C 语言图标 | default: "C "
+# style | default: "149 bold"
+# format | default: "via [$symbol($version(-$name) )]($style)"
 [c]
 symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Rust 图标 | default: "🦀 "
+# style | default: "bold red"
+# format | default: "via [$symbol($version )]($style)"
 [rust]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Go 图标 | default: "🐹 "
+# style | default: "bold cyan"
+# format | default: "via [$symbol($version )]($style)"
 [golang]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: PHP 图标 | default: "🐘 "
+# style | default: "147 bold"
+# format | default: "via [$symbol($version )]($style)"
 [php]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Java 图标 | default: "☕ "
+# style | default: "red dimmed"
+# format | default: "via [$symbol($version )]($style)"
 [java]
 symbol = " "
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Kotlin 图标 | default: "🅺 "
+# style | default: "bold blue"
+# format | default: "via [$symbol($version )]($style)"
 [kotlin]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Haskell 图标 | default: "λ "
+# style | default: "bold purple"
+# format | default: "via [$symbol($version )]($style)"
 [haskell]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
+# symbol: Python 图标 | default: "🐍 "
+# style | default: "yellow bold"
+# format | default: "via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)"
 [python]
 symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
 
+# symbol: Docker 图标 | default: "🐳 "
+# style | default: "blue bold"
+# format | default: "via [$symbol$context]($style) "
 [docker_context]
 symbol = ""
 style = "bg:sapphire"
 format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
 
+# symbol: Conda 图标 | default: "🅒 "
 [conda]
 symbol = " "
+# 模块样式 | default: "green bold"
 style = "sapphire"
+# 显示格式 | default: "via [$symbol$environment]($style) "
 format = '[$symbol$environment]($style)'
+# 是否隐藏 base 环境，false 表示始终显示 | default: true
 ignore_base = false
 
+
+# Catppuccin 调色板定义，通过切换顶部 palette 值即可一键换色
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"

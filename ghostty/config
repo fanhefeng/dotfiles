@@ -7,191 +7,119 @@
 
 # ===== 字体配置 =====
 
-# 字体名称，使用 Nerd Font 以支持 Powerline 圆角和图标字符
+# 字体名称，使用 Nerd Font 以支持图标字符和 Powerline 符号
+# default: 未设置（内置 JetBrains Mono 作为 fallback）
 font-family = JetBrainsMono Nerd Font
 
 # 字体大小，单位为 pt（磅）
+# default: 13 (macOS), 12 (Linux)
 font-size = 18
 
-# 是否加粗渲染字体笔画，开启后字符更清晰，适合高分辨率屏幕
-# macOS Retina 屏推荐开启，避免字体过细看不清
+# 加粗渲染字体笔画，适合 macOS Retina 高分屏，避免字体过细
+# default: false
 font-thicken = true
 
-# 调整单元格行高，百分比相对于默认行高
-# 增加 20% 行距让文本不会挤在一起，提升长时间阅读的舒适度
+# 调整单元格行高，百分比相对于默认行高，增加行距提升阅读舒适度
+# default: 无调整
 adjust-cell-height = 20%
 
 
 # ===== 主题 =====
 
-# 配色方案名称，Ghostty 内置多种主题
-# 运行 ghostty +list-themes 可查看所有可用主题
-# catppuccin-mocha 是社区最流行的深色主题之一，色彩柔和护眼
+# 配色方案，运行 ghostty +list-themes 查看所有可用主题
+# default: 无（使用内置默认配色）
 theme = Catppuccin Mocha
 
 
 # ===== 窗口外观 =====
 
 # 背景不透明度，范围 0.0（全透明）~ 1.0（完全不透明）
-# 0.92 轻微透明，可以隐约看到桌面壁纸，同时不影响文字阅读
+# default: 1.0
 background-opacity = 0.92
 
-# 背景毛玻璃模糊半径，数值越大模糊程度越强
-# 配合 background-opacity 使用，让透明背景呈现磨砂玻璃效果
+# 背景毛玻璃模糊半径，配合 background-opacity 呈现磨砂玻璃效果
+# default: false（关闭）
 background-blur-radius = 20
 
 # 窗口内容区域左右内边距，单位为像素
-# 让文字不紧贴窗口边缘，视觉上更舒适
+# default: 2
 window-padding-x = 8
 
 # 窗口内容区域上下内边距，单位为像素
+# default: 2
 window-padding-y = 4
 
-# 窗口装饰模式：auto 跟随系统设置，none 无边框，client/server 指定渲染方
-window-decoration = auto
-
-# macOS 标题栏样式
-# tabs: 标题栏与标签页合并，节省纵向空间（类似 Arc/Safari 风格）
-# native: 使用原生 macOS 标题栏
-# transparent: 透明标题栏
-# hidden: 隐藏标题栏
+# macOS 标题栏样式：tabs（标签页合并）| native | transparent | hidden
+# default: transparent
 macos-titlebar-style = tabs
 
-# 窗口状态持久化：关闭后重新打开时恢复之前的窗口位置和大小
-# always: 总是保存并恢复
-# never: 不保存
-# default: 仅在正常退出时保存
+# 窗口状态持久化：always（总是恢复）| never | default（仅正常退出时保存）
+# default: default
 window-save-state = always
 
 
-# ===== 光标 =====
+# ===== Shell 集成 =====
 
-# 光标形状
-# block: 方块（覆盖整个字符位置）
-# bar: 竖线（在字符左侧闪烁）
-# underline: 下划线
-cursor-style = block
-
-# 光标是否闪烁，true 开启闪烁，false 常亮不闪
-cursor-style-blink = true
-
-# Shell 集成功能，Ghostty 会自动注入 shell 集成脚本
-# cursor: 根据 shell 模式自动切换光标形状（普通模式方块/输入模式竖线）
-# sudo: 在 sudo 命令中保持 shell 集成功能
-# title: 自动将当前运行的命令或目录设为终端标题
+# Shell 集成功能，Ghostty 自动注入 shell 集成脚本
+# cursor: 根据 shell 模式自动切换光标形状
+# sudo: 在 sudo 命令中保持 shell 集成
+# title: 将当前命令或目录设为终端标题
+# default: cursor,title,path（sudo 默认关，path 默认开）
 shell-integration-features = cursor,sudo,title
 
 
 # ===== 鼠标 =====
 
 # 打字时自动隐藏鼠标光标，移动鼠标后重新显示
-# 避免光标遮挡正在输入的文本
+# default: false
 mouse-hide-while-typing = true
 
-# 鼠标选中文本后自动复制到系统剪贴板
-# clipboard: 复制到系统剪贴板
-# none: 不自动复制
-# 省去手动 Cmd+C 的步骤
+# 鼠标选中文本后自动复制到系统剪贴板：clipboard | none
+# default: true（macOS 复制到选择缓冲区）
 copy-on-select = clipboard
-
-# 是否自动检测并高亮终端中的 URL 链接
-# 开启后 URL 可点击直接在浏览器中打开
-link-url = true
-
-
-# ===== 滚动 =====
-
-# 回滚缓冲区行数，即可以向上滚动查看的历史输出行数
-# 10000 行足够大多数场景，设太大会占用更多内存
-scrollback-limit = 10000
 
 
 # ===== 剪贴板 =====
 
-# 是否允许终端内程序读取系统剪贴板（如 vim 的 "+p）
-# allow: 允许读取
-# deny: 禁止读取
-# ask: 每次询问
+# 允许终端内程序通过 OSC 52 读取系统剪贴板：allow | deny | ask
+# default: ask
 clipboard-read = allow
 
-# 是否允许终端内程序写入系统剪贴板（如 vim 的 "+y）
-clipboard-write = allow
-
-# 粘贴保护：粘贴内容包含换行符或特殊字符时是否弹出确认框
-# true: 弹出确认（防止意外执行粘贴的命令）
-# false: 直接粘贴不确认（更流畅，适合有经验的用户）
+# 粘贴保护：粘贴内容含换行符时是否弹出确认框，防止意外执行命令
+# default: true
 clipboard-paste-protection = false
 
 
 # ===== 图像协议 =====
 
-# 终端图像存储上限，单位为字节
-# Ghostty 原生支持 Kitty 图像协议，yazi 文件管理器会使用该协议显示图片预览
-# 320000000 ≈ 305MB，足够显示高清大图
-# 默认值较小，调大后 yazi 预览大图不会被截断
+# 终端图像存储上限（字节），支持 Kitty 图像协议（yazi 预览等）
+# default: 320000000（~305MB）
 image-storage-limit = 320000000
 
 
 # ===== 快捷键 =====
 # 格式: keybind = 修饰键+按键=动作:参数
-# super = Cmd 键 (macOS)
-# alt = Option 键 (macOS)
-# shift = Shift 键
+# 自定义快捷键是追加模式，不会覆盖内置默认快捷键
+# super = Cmd (macOS) | alt = Option (macOS)
 
-# --- 分屏操作 ---
-
-# Cmd+D: 在当前面板右侧创建新的垂直分屏
+# --- 分屏操作（自定义，非默认快捷键）---
 keybind = super+d=new_split:right
-
-# Cmd+Shift+D: 在当前面板下方创建新的水平分屏
 keybind = super+shift+d=new_split:down
 
-# --- 分屏导航 ---
-
-# Cmd+Option+左箭头: 焦点移到左侧分屏
+# --- 分屏导航（自定义，非默认快捷键）---
 keybind = super+alt+left=goto_split:left
-
-# Cmd+Option+右箭头: 焦点移到右侧分屏
 keybind = super+alt+right=goto_split:right
-
-# Cmd+Option+上箭头: 焦点移到上方分屏
 keybind = super+alt+up=goto_split:top
-
-# Cmd+Option+下箭头: 焦点移到下方分屏
 keybind = super+alt+down=goto_split:bottom
 
-# --- 标签页操作 ---
-
-# Cmd+T: 新建标签页
+# --- 以下为内置默认快捷键的显式声明 ---
 keybind = super+t=new_tab
-
-# Cmd+W: 关闭当前面板（如果是最后一个面板则关闭标签页）
 keybind = super+w=close_surface
-
-# --- 字体大小调整 ---
-
-# Cmd+=（加号键）: 放大字体 1pt
 keybind = super+equal=increase_font_size:1
-
-# Cmd+-（减号键）: 缩小字体 1pt
 keybind = super+minus=decrease_font_size:1
-
-# Cmd+0: 重置字体为配置文件中的默认大小
 keybind = super+0=reset_font_size
-
-# --- 快速切换标签页 ---
-
-# Cmd+数字键: 直接跳转到对应序号的标签页
 keybind = super+1=goto_tab:1
 keybind = super+2=goto_tab:2
 keybind = super+3=goto_tab:3
 keybind = super+4=goto_tab:4
 keybind = super+5=goto_tab:5
-
-
-# ===== 性能 =====
-
-# 垂直同步：将渲染帧率与显示器刷新率同步
-# 开启后避免画面撕裂，减少不必要的 GPU 渲染，降低功耗
-# 对于终端这种非高帧率场景，建议保持开启
-window-vsync = true
